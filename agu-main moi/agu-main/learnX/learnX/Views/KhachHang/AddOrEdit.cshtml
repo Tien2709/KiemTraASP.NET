@@ -1,0 +1,50 @@
+﻿@model KhachHangViewModel
+
+@{
+}
+
+<div class="container">
+    <div class="card">
+        <div class="card-body">
+            <p class="mt-0 mb-2 fw-semibold text-dark font-18 text-center">@ViewBag.RenderedHtmlTitle</p>
+            <form asp-action="AddOrEdit" asp-controller="KhachHang" asp-route-id="@Model.MaKH">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="MaKH" value="@Model.MaKH" />
+                <div>
+                    <div class="form-group mb-2">
+                        <label asp-for="Ten" class="control-label"></label>
+                        <div class="input-group mb-2">
+                            <input asp-for="Ten" class="form-control" placeholder="Nhập họ và tên" value="@Model.Ten" />
+                        </div>
+                        <span asp-validation-for="Ten" class="text-danger"></span>
+                    </div><!--end form-group-->
+
+                    <div class="form-group mb-2">
+                        <label asp-for="SDT" class="control-label"></label>
+                        <div class="input-group mb-2">
+                            <input asp-for="SDT" type="number" class="form-control" placeholder="Nhập số điện thoại" value="@Model.SDT" />
+                        </div>
+                        <span asp-validation-for="SDT" class="text-danger"></span>
+                    </div><!--end form-group-->
+
+                    <div class="form-group">
+                        <br />
+                        <div class="col-md-12 offset-md-5">
+                            <div class="d-flex">
+                                <div style="margin-right:10px;">
+                                    <input type="submit" value="Submit" class="btn btn-primary btn-block" style="width:80px" />
+                                </div>
+                                <div>
+                                    <a asp-controller="KhachHang" asp-action="Index" class="btn btn-success text-white"><i class="fe-log-out"></i> Close</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div> <!-- end card-->
+</div>
+
+@section scripts{
+}

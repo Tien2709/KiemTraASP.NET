@@ -1,0 +1,84 @@
+﻿@model UserViewModel
+
+@{
+}
+
+<div class="container">
+    <div class="card">
+        <div class="card-body">
+            <p class="mt-0 mb-2 fw-semibold text-dark font-18 text-center">@ViewBag.RenderedHtmlTitle</p>
+            <form asp-action="AddOrEdit" asp-controller="User" asp-route-id="@Model.uID">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="uID" value="@Model.uID" />
+                <input type="hidden" asp-for="CreatedDate" value="@Model.CreatedDate" />
+                <div>
+                    <div class="form-group mb-2">
+                        <label asp-for="uFullName" class="control-label"></label>
+                        <div class="input-group mb-2">
+                            <input asp-for="uFullName" class="form-control" placeholder="Nhập họ và tên" value="@Model.uFullName" />
+                        </div>
+                        <span asp-validation-for="uFullName" class="text-danger"></span>
+                    </div><!--end form-group-->
+
+                    <div class="form-group mb-2">
+                        <div class="form-check">
+                            <input asp-for="uSex" class="form-check-input" type="checkbox"
+                                   onchange="$('#uSex').val(this.checked)" value="@Model.uSex">
+                            <label asp-for="uSex" class="form-check-label"></label>
+                        </div>
+                    </div><!--end form-group-->
+
+                    <div class="form-group mb-2">
+                        <label asp-for="uMobile" class="control-label"></label>
+                        <div class="input-group mb-2">
+                            <input asp-for="uMobile" type="number" class="form-control" placeholder="Nhập số điện thoại" value="@Model.uMobile" />
+                        </div>
+                        <span asp-validation-for="uMobile" class="text-danger"></span>
+                    </div><!--end form-group-->
+
+                    <div class="form-group mb-2">
+                        <label asp-for="uEmail" class="control-label"></label>
+                        <div class="input-group mb-2">
+                            <input asp-for="uEmail" class="form-control" placeholder="Nhập email" value="@Model.uEmail" />
+                        </div>
+                        <span asp-validation-for="uEmail" class="text-danger"></span>
+                    </div><!--end form-group-->
+
+                    <div class="form-group mb-2">
+                        <label asp-for="uInformation" class="control-label"></label>
+                        <div class="input-group mb-2">
+                            <textarea asp-for="uInformation" class="form-control" placeholder="Nhập nội dung" rows="3">
+                                @Model.uInformation</textarea>
+                        </div>
+                        <span asp-validation-for="uInformation" class="text-danger"></span>
+                    </div><!--end form-group-->
+
+                    <div class="form-group mb-2">
+                        <div class="form-check">
+                            <input asp-for="isActived" class="form-check-input" type="checkbox"
+                                   onchange="$('#isActived').val(this.checked)" value="@Model.isActived">
+                            <label asp-for="isActived" class="form-check-label"></label>
+                        </div>
+                    </div><!--end form-group-->
+
+                    <div class="form-group">
+                        <br />
+                        <div class="col-md-12 offset-md-5">
+                            <div class="d-flex">
+                                <div style="margin-right:10px;">
+                                    <input type="submit" value="Submit" class="btn btn-primary btn-block" style="width:80px" />
+                                </div>
+                                <div>
+                                    <a asp-controller="User" asp-action="Index" class="btn btn-success text-white"><i class="fe-log-out"></i> Close</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div> <!-- end card-->
+</div>
+
+@section scripts{
+}

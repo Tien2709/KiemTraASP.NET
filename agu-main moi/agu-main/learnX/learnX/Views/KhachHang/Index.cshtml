@@ -1,0 +1,74 @@
+﻿
+<div class="row d-flex justify-content-center">
+    <div class="col-12 align-self-center">
+        <div class="card">
+            <div class="card-body">
+                <p class="mt-0 mb-2 fw-semibold text-dark font-18 text-center">DANH SÁCH KHÁCH HÀNG</p>
+                <div class="table-responsive">
+                    <div class="mb-2">
+                        <a asp-controller="KhachHang" asp-action="AddOrEdit" class="btn btn-success text-white"><i class="fas fa-random"></i> Thêm mới</a>
+                    </div>
+                    <table id="basic-datatable" class="table table-hover table-centered dt-responsive nowrap w-100 mb-0">
+                        <thead>
+                            <tr>
+                                <th>Họ và tên</th>
+                                <th>Số Phone</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@item.Ten</td>
+                                    <td>@item.SDT</td>
+                                    <td>
+                                        <a asp-controller="KhachHang" asp-action="AddOrEdit" asp-route-id="@item.MaKH" class="btn btn-info text-white">
+                                            <i class="fas fa-edit text-white"></i> Edit
+                                        </a>
+
+                                        <form asp-action="Delete" asp-route-id="@item.MaKH" onsubmit="return jQueryAjaxDelete(this)" class="d-inline">
+                                            <button class="btn btn-danger" type="submit">
+                                                <i class="fas fa-trash-alt text-white"></i> Delete
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table><!--end /table-->
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+@section scripts{
+    <script>
+        jQueryAjaxDelete = form => {
+            try {
+                if (confirm('Are you sure to delete this record ?')) {
+                    $.ajax({
+                        type: 'POST',
+                        url: form.action,
+                        data: new FormData(form),
+                        contentType: false,
+                        processData: false,
+                        success: function (res) {
+                            location.reload(false);
+                        },
+                        error: function (err) {
+                            console.log(err)
+                        }
+                    })
+
+                }
+            } catch (ex) {
+                console.log(ex)
+            }
+            //prevent default form submit event
+            return false;
+        }
+    </script>
+}
